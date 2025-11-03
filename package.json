@@ -1,6 +1,6 @@
 {
   "name": "@crashbytes/semantic-text-toolkit",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Production-grade semantic text analysis with embeddings, similarity, and vector operations",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
