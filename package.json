@@ -1,0 +1,56 @@
+{
+  "name": "@crashbytes/semantic-text-toolkit",
+  "version": "1.0.0",
+  "description": "Production-grade semantic text analysis with embeddings, similarity, and vector operations",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "exports": {
+    ".": {
+      "import": "./dist/index.mjs",
+      "require": "./dist/index.js",
+      "types": "./dist/index.d.ts"
+    }
+  },
+  "scripts": {
+    "build": "tsup src/index.ts --format cjs,esm --dts --clean",
+    "dev": "tsup src/index.ts --format cjs,esm --dts --watch",
+    "test": "jest",
+    "test:watch": "jest --watch",
+    "lint": "eslint src --ext .ts",
+    "prepublishOnly": "npm run build && npm test"
+  },
+  "keywords": [
+    "semantic",
+    "embeddings",
+    "text-analysis",
+    "ml",
+    "ai",
+    "vector-search",
+    "similarity",
+    "nlp"
+  ],
+  "author": "Blackhole Software, LLC",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/crashbytes/crashbytes-npmjs.git",
+    "directory": "semantic-text-toolkit"
+  },
+  "dependencies": {
+    "@xenova/transformers": "^2.17.1"
+  },
+  "devDependencies": {
+    "@types/jest": "^29.5.12",
+    "@types/node": "^20.11.19",
+    "@typescript-eslint/eslint-plugin": "^6.21.0",
+    "@typescript-eslint/parser": "^6.21.0",
+    "eslint": "^8.56.0",
+    "jest": "^29.7.0",
+    "ts-jest": "^29.1.2",
+    "tsup": "^8.0.2",
+    "typescript": "^5.3.3"
+  },
+  "engines": {
+    "node": ">=16.0.0"
+  }
+}
