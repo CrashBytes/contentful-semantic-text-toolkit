@@ -4,8 +4,10 @@ Production-grade semantic text analysis with embeddings, similarity computation,
 
 **Part of the [CrashBytes npm ecosystem](https://github.com/CrashBytes)** | Built by Blackhole Software, LLC
 
-[![npm version](https://badge.fury.io/js/%40crashbytes%2Fsemantic-text-toolkit.svg)](https://www.npmjs.com/package/@crashbytes/semantic-text-toolkit)
-[![npm downloads](https://img.shields.io/npm/dm/@crashbytes/semantic-text-toolkit.svg)](https://www.npmjs.com/package/@crashbytes/semantic-text-toolkit)
+[![npm](https://img.shields.io/npm/v/@crashbytes/semantic-text-toolkit)](https://www.npmjs.com/package/@crashbytes/semantic-text-toolkit)
+[![npm](https://img.shields.io/npm/dm/@crashbytes/semantic-text-toolkit)](https://www.npmjs.com/package/@crashbytes/semantic-text-toolkit)
+[![npm bundle size](https://img.shields.io/bundlephobia/min/@crashbytes/semantic-text-toolkit)](https://bundlephobia.com/package/@crashbytes/semantic-text-toolkit)
+[![GitHub](https://img.shields.io/github/license/CrashBytes/contentful-semantic-text-toolkit)](./LICENSE)
 
 ---
 
