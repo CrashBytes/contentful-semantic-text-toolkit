@@ -2,7 +2,10 @@
 
 Production-grade semantic text analysis with embeddings, similarity computation, and vector search operations.
 
-**Built by Blackhole Software, LLC**
+**Part of the [CrashBytes npm ecosystem](https://github.com/CrashBytes)** | Built by Blackhole Software, LLC
+
+[![npm version](https://badge.fury.io/js/%40crashbytes%2Fsemantic-text-toolkit.svg)](https://www.npmjs.com/package/@crashbytes/semantic-text-toolkit)
+[![npm downloads](https://img.shields.io/npm/dm/@crashbytes/semantic-text-toolkit.svg)](https://www.npmjs.com/package/@crashbytes/semantic-text-toolkit)
 
 ---
 
