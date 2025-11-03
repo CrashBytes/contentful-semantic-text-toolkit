@@ -7,7 +7,7 @@ Production-grade semantic text analysis with embeddings, similarity computation,
 [![npm](https://img.shields.io/npm/v/@crashbytes/semantic-text-toolkit)](https://www.npmjs.com/package/@crashbytes/semantic-text-toolkit)
 [![npm](https://img.shields.io/npm/dm/@crashbytes/semantic-text-toolkit)](https://www.npmjs.com/package/@crashbytes/semantic-text-toolkit)
 [![npm bundle size](https://img.shields.io/bundlephobia/min/@crashbytes/semantic-text-toolkit)](https://bundlephobia.com/package/@crashbytes/semantic-text-toolkit)
-[![GitHub](https://img.shields.io/github/license/CrashBytes/contentful-semantic-text-toolkit)](./LICENSE)
+[![license](https://img.shields.io/badge/license-MIT-blue.svg)](./LICENSE)
 
 ---
 
