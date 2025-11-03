@@ -32,7 +32,7 @@ export interface IndexedItem<T = string> {
 
 export class SemanticSearch<T = string> {
   private engine: SemanticEngine;
-  private index: IndexedItem<T>[] = [];
+  private indexedItems: IndexedItem<T>[] = [];
   private config: Required<SearchConfig<T>>;
 
   constructor(engine: SemanticEngine, config: SearchConfig<T> = {}) {
@@ -54,7 +54,7 @@ export class SemanticSearch<T = string> {
     }
 
     if (replace) {
-      this.index = [];
+      this.indexedItems = [];
     }
 
     const texts = items.map(this.config.textExtractor);
@@ -66,14 +66,14 @@ export class SemanticSearch<T = string> {
       metadata: this.config.metadataExtractor(item),
     }));
 
-    this.index.push(...newIndexItems);
+    this.indexedItems.push(...newIndexItems);
   }
 
   async search(
     query: string,
     overrideConfig?: Partial<SearchConfig<T>>
   ): Promise<SearchResult<T>[]> {
-    if (this.index.length === 0) {
+    if (this.indexedItems.length === 0) {
       throw new SemanticError(
         SemanticErrorCode.INVALID_INPUT,
         'Index is empty. Call index() before searching.'
@@ -82,7 +82,7 @@ export class SemanticSearch<T = string> {
 
     const config = { ...this.config, ...overrideConfig };
     const queryResult = await this.engine.embed(query);
-    const candidateEmbeddings = this.index.map(item => item.embedding);
+    const candidateEmbeddings = this.indexedItems.map(item => item.embedding);
     const topK = topKSimilar(queryResult.embedding, candidateEmbeddings, config.topK);
 
     const results: SearchResult<T>[] = [];
@@ -92,7 +92,7 @@ export class SemanticSearch<T = string> {
       if (score < config.threshold) continue;
 
       results.push({
-        item: this.index[idx].item,
+        item: this.indexedItems[idx].item,
         score,
         rank: rank++,
       });
@@ -106,13 +106,13 @@ export class SemanticSearch<T = string> {
     filter: (metadata: Record<string, unknown>) => boolean,
     config?: Partial<SearchConfig<T>>
   ): Promise<SearchResult<T>[]> {
-    const originalIndex = this.index;
-    this.index = originalIndex.filter(item => filter(item.metadata ?? {}));
+    const originalIndex = this.indexedItems;
+    this.indexedItems = originalIndex.filter(item => filter(item.metadata ?? {}));
 
     try {
       return await this.search(query, config);
     } finally {
-      this.index = originalIndex;
+      this.indexedItems = originalIndex;
     }
   }
 
@@ -129,8 +129,8 @@ export class SemanticSearch<T = string> {
     dimensions: number;
     memoryEstimate: string;
   } {
-    const itemCount = this.index.length;
-    const dimensions = this.index[0]?.embedding.length ?? 0;
+    const itemCount = this.indexedItems.length;
+    const dimensions = this.indexedItems[0]?.embedding.length ?? 0;
     const totalBytes = itemCount * dimensions * 8;
     
     const memoryEstimate = totalBytes < 1024 * 1024
@@ -141,14 +141,14 @@ export class SemanticSearch<T = string> {
   }
 
   clear(): void {
-    this.index = [];
+    this.indexedItems = [];
   }
 
   exportIndex(): IndexedItem<T>[] {
-    return [...this.index];
+    return [...this.indexedItems];
   }
 
   importIndex(index: IndexedItem<T>[]): void {
-    this.index = [...index];
+    this.indexedItems = [...index];
   }
 }
