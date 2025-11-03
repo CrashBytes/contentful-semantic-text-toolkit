@@ -8,7 +8,7 @@
  * - Defensive error handling with semantic codes
  */
 
-import { pipeline, Pipeline } from '@xenova/transformers';
+import { pipeline, FeatureExtractionPipeline } from '@xenova/transformers';
 import {
   ModelConfig,
   EmbeddingResult,
@@ -28,7 +28,7 @@ const DEFAULT_CONFIG: Required<ModelConfig> = {
 };
 
 export class SemanticEngine {
-  private model: Pipeline | null = null;
+  private model: FeatureExtractionPipeline | null = null;
   private config: Required<ModelConfig>;
   private initializationPromise: Promise<void> | null = null;
 
@@ -82,7 +82,7 @@ export class SemanticEngine {
     }
   }
 
-  private assertInitialized(): asserts this is { model: Pipeline } {
+  private assertInitialized(): void {
     if (!this.model) {
       throw new SemanticError(
         SemanticErrorCode.MODEL_NOT_LOADED,
@@ -105,7 +105,7 @@ export class SemanticEngine {
     const startTime = performance.now();
 
     try {
-      const output = await this.model(text, {
+      const output = await this.model!(text, {
         pooling: 'mean',
         normalize: true,
       });
