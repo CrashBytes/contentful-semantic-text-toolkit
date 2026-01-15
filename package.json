@@ -15,6 +15,7 @@
     "build": "tsup src/index.ts --format cjs,esm --dts --clean",
     "dev": "tsup src/index.ts --format cjs,esm --dts --watch",
     "test": "jest --passWithNoTests",
+    "test:coverage": "jest --coverage --passWithNoTests",
     "test:watch": "jest --watch",
     "lint": "eslint src --ext .ts",
     "prepublishOnly": "npm run build && npm test"
