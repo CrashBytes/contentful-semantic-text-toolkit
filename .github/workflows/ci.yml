@@ -21,9 +21,10 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: ${{ matrix.node-version }}
+          cache: 'npm'
 
       - name: Install dependencies
-        run: npm install
+        run: npm ci
 
       - name: Lint
         run: npm run lint
@@ -32,11 +33,13 @@ jobs:
         run: npm run build
 
       - name: Test with coverage
-        run: npm test -- --coverage
+        run: npm run test:coverage
 
       - name: Upload coverage reports
         if: matrix.node-version == 20
         uses: codecov/codecov-action@v4
         with:
-          file: ./coverage/lcov.info
+          token: ${{ secrets.CODECOV_TOKEN }}
+          files: ./coverage/lcov.info
+          flags: unittests
           fail_ci_if_error: false
