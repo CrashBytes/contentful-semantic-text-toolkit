@@ -86,7 +86,7 @@ new SemanticEngine(config?: ModelConfig)
 **Configuration Parameters:**
 - `modelName` - Hugging Face model identifier (default: `'Xenova/all-MiniLM-L6-v2'`)
 - `maxLength` - Maximum sequence length (default: `512`)
-- `quantized` - Enable quantization (default: `true`)
+- `dtype` - Model weight precision: `'fp32' | 'fp16' | 'q8' | 'q4' | 'q4f16'` (default: `'q8'` — 8-bit quantization)
 - `onProgress` - Progress callback for model loading
 
 #### Key Methods
@@ -190,7 +190,7 @@ When optimizing for response time:
 ### 2. Memory-Constrained Environments
 
 When managing resource limitations:
-- Leverage quantized models (enabled by default)
+- Leverage quantized models (`dtype: 'q8'` is the default; `'q4'` for further reduction)
 - Clear search indexes when not actively in use
 - Process data in smaller, manageable batches
 - Consider model distillation for further reduction
@@ -216,7 +216,7 @@ When scaling for volume:
 - **Speedup**: 3.75x
 
 **Memory Profile:**
-- Model (quantized): ~23MB
+- Model (`dtype: 'q8'`): ~23MB
 - Base runtime: ~100MB
 - Per 1000 embeddings: ~1.5MB
 
@@ -230,7 +230,7 @@ When scaling for volume:
 const engine = new SemanticEngine({
   modelName: 'Xenova/multilingual-e5-large',
   maxLength: 512,
-  quantized: false
+  dtype: 'fp32'
 });
 ```
 
@@ -239,7 +239,7 @@ const engine = new SemanticEngine({
 ```typescript
 const engine = new SemanticEngine({
   modelName: 'Xenova/all-MiniLM-L6-v2',
-  quantized: true,
+  dtype: 'q8',
   onProgress: (progress) => {
     if (progress.status === 'downloading') {
       logger.info(`Model download: ${progress.progress}%`);

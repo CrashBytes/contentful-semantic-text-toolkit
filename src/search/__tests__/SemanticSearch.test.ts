@@ -6,7 +6,7 @@
  */
 
 // Mock the transformers library before any imports
-jest.mock('@xenova/transformers', () => ({
+jest.mock('@huggingface/transformers', () => ({
   pipeline: jest.fn(),
 }));
 

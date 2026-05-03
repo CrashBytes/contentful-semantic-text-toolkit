@@ -12,7 +12,7 @@ export type Embedding = number[];
 export interface ModelConfig {
   modelName?: string;
   maxLength?: number;
-  quantized?: boolean;
+  dtype?: 'fp32' | 'fp16' | 'q8' | 'q4' | 'q4f16';
   onProgress?: (progress: ModelLoadProgress) => void;
 }
 

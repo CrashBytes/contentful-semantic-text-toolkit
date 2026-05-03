@@ -8,7 +8,7 @@
  * - Defensive error handling with semantic codes
  */
 
-import { pipeline, FeatureExtractionPipeline } from '@xenova/transformers';
+import { pipeline, FeatureExtractionPipeline } from '@huggingface/transformers';
 import {
   ModelConfig,
   EmbeddingResult,
@@ -23,7 +23,7 @@ import { cosineSimilarity, euclideanDistance, dotProduct } from '../utils/vector
 const DEFAULT_CONFIG: Required<ModelConfig> = {
   modelName: 'Xenova/all-MiniLM-L6-v2',
   maxLength: 512,
-  quantized: true,
+  dtype: 'q8',
   onProgress: () => {},
 };
 
@@ -65,7 +65,7 @@ export class SemanticEngine {
         'feature-extraction',
         this.config.modelName,
         {
-          quantized: this.config.quantized,
+          dtype: this.config.dtype,
         }
       );
 

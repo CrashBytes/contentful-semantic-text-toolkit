@@ -9,11 +9,11 @@ import { SemanticEngine } from '../SemanticEngine';
 import { SemanticError, SemanticErrorCode } from '../../types';
 
 // Mock the transformers library
-jest.mock('@xenova/transformers', () => ({
+jest.mock('@huggingface/transformers', () => ({
   pipeline: jest.fn(),
 }));
 
-import { pipeline } from '@xenova/transformers';
+import { pipeline } from '@huggingface/transformers';
 
 const mockPipeline = pipeline as jest.MockedFunction<typeof pipeline>;
 
@@ -48,20 +48,20 @@ describe('SemanticEngine', () => {
       const config = engine.getConfig();
       expect(config.modelName).toBe('Xenova/all-MiniLM-L6-v2');
       expect(config.maxLength).toBe(512);
-      expect(config.quantized).toBe(true);
+      expect(config.dtype).toBe('q8');
     });
 
     it('accepts custom configuration', () => {
       const customEngine = new SemanticEngine({
         modelName: 'custom-model',
         maxLength: 256,
-        quantized: false,
+        dtype: 'fp32',
       });
 
       const config = customEngine.getConfig();
       expect(config.modelName).toBe('custom-model');
       expect(config.maxLength).toBe(256);
-      expect(config.quantized).toBe(false);
+      expect(config.dtype).toBe('fp32');
 
       customEngine.dispose();
     });
@@ -84,7 +84,7 @@ describe('SemanticEngine', () => {
       expect(mockPipeline).toHaveBeenCalledWith(
         'feature-extraction',
         'Xenova/all-MiniLM-L6-v2',
-        { quantized: true }
+        { dtype: 'q8' }
       );
       expect(engine.isReady()).toBe(true);
     });
