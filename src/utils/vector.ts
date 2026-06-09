@@ -147,7 +147,7 @@ export function topKSimilar(
   const similarities: Array<[number, number]> = candidates.map((candidate, idx) => {
     try {
       return [idx, cosineSimilarity(query, candidate)];
-    } catch (error) {
+    } catch {
       return [idx, -Infinity];
     }
   });

@@ -17,7 +17,7 @@
     "test": "jest --passWithNoTests",
     "test:coverage": "jest --coverage --passWithNoTests",
     "test:watch": "jest --watch",
-    "lint": "eslint src --ext .ts",
+    "lint": "eslint src",
     "prepublishOnly": "npm run build && npm test"
   },
   "keywords": [
@@ -40,6 +40,7 @@
     "@huggingface/transformers": "^4.2.0"
   },
   "devDependencies": {
+    "@eslint/js": "^10.0.1",
     "@types/jest": "^30.0.0",
     "@types/node": "^25.9.2",
     "@typescript-eslint/eslint-plugin": "^8.61.0",
