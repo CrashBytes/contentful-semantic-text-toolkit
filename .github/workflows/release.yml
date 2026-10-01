@@ -24,8 +24,8 @@ jobs:
           node-version: '20'
           registry-url: 'https://registry.npmjs.org'
 
-      - name: Install latest npm
-        run: npm install -g npm@latest
+      - name: Install latest npm compatible with Node 20
+        run: npm install -g npm@11
 
       - name: Install dependencies
         run: npm install
